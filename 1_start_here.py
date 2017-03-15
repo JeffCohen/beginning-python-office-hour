@@ -1,4 +1,3 @@
-# bit.ly/beginningpy
 # https://docs.python.org/3/howto/urllib2.html
 
 import urllib.request
