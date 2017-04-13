@@ -3,7 +3,6 @@
 # http://api.open-notify.org/astros.json
 
 # This code works.  Run it to verify.
-# Then read the challenge at the bottom of this file.
 
 import urllib.request
 import json
