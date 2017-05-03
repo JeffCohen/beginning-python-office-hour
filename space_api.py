@@ -7,7 +7,7 @@
 import urllib.request
 import json
 
-people_url = "http://api.open-notify.org/astros.json"
+astros_url = "http://api.open-notify.org/astros.json"
 location_url = "http://api.open-notify.org/iss-now.json"
 
 def retrieve_space_data():
@@ -15,7 +15,7 @@ def retrieve_space_data():
     Return a dictionary of space station data.
     '''
 
-    with urllib.request.urlopen(people_url) as response:
+    with urllib.request.urlopen(astros_url) as response:
         data = json.loads(response.read().decode('utf8'))
 
     with urllib.request.urlopen(location_url) as response:
