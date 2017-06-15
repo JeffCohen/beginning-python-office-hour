@@ -1,26 +1,31 @@
-# https://gist.github.com/JeffCohen/c8693203198cc94b64a3db36e736d622
-# https://docs.python.org/3/howto/urllib2.html
-# http://api.open-notify.org/astros.json
-
-# This code works.  Run it to verify.
+# Intro to unit testing in Python 3
 
 import urllib.request
 import json
 
-astros_url = "http://api.open-notify.org/astros.json"
-location_url = "http://api.open-notify.org/iss-now.json"
+# import unittest
+# from unittest.mock import Mock
 
-def retrieve_space_data():
-    '''
-    Return a dictionary of space station data.
-    '''
 
-    with urllib.request.urlopen(astros_url) as response:
-        data = json.loads(response.read().decode('utf8'))
+class SpaceAPI:
 
-    with urllib.request.urlopen(location_url) as response:
-        location_data = json.loads(response.read().decode('utf8'))
+    def get_astronaut_data(self):
+        astros_url = "http://api.open-notify.org/astros.json"
+        with urllib.request.urlopen(astros_url) as response:
+            return json.loads(response.read().decode('utf8'))
 
-    data['position'] = location_data['iss_position']
+    def get_names_of_astronauts(self):
+        data = self.get_astronaut_data()
+        return [person['name'] for person in data['people']]
 
-    return data
+    def get_location_data(self):
+        location_url = "http://api.open-notify.org/iss-now.json"
+        with urllib.request.urlopen(location_url) as response:
+            location_data = json.loads(response.read().decode('utf8'))
+
+        return location_data['iss_position']
+
+
+if __name__ == '__main__':
+    api = SpaceAPI()
+    print(api.get_names_of_astronauts())
